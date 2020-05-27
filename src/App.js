@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import {Link, Route} from 'wouter'
 import StaticContext from 'contexts/StaticContext'
-import Home from 'pages/Home'
-import SearchResults from 'pages/SearchResults';
-import Detail from 'pages/Detail'
 import Logo from 'components/Logo'
 import {GifContextProvider} from 'contexts/GifsContext'
+
+
+const Home = React.lazy(() => import('pages/Home'))
+const SearchResults = React.lazy(() => import('pages/SearchResults'))
+const Detail = React.lazy(() => import('pages/Detail'))
 
 function App() {
   
@@ -17,19 +19,21 @@ function App() {
           <Link to='/'>
             <Logo className='App-logo'/>
           </Link>
-          <GifContextProvider>
-            <Route 
-              component={Home}
-              path='/' 
-            />
-            <Route 
-              component={SearchResults}
-              path='/search/:keyword' 
-            />
-            <Route 
-              component={Detail}  
-              path='/gif/:id' />
-          </GifContextProvider>
+          <Suspense fallback={null}>
+            <GifContextProvider>
+              <Route 
+                component={Home}
+                path='/' 
+              />
+              <Route 
+                component={SearchResults}
+                path='/search/:keyword' 
+              />
+              <Route 
+                component={Detail}  
+                path='/gif/:id' />
+            </GifContextProvider>
+          </Suspense>
         </section>
       </div>
     </StaticContext.Provider>

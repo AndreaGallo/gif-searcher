@@ -8,7 +8,7 @@ const fromApiResponseToGifs = apiResponse => {
     return gifs
 }
 
-export default async function getGifs({ keyword = 'panda', limit = 10, page = 0 } = {}) {
+export default async function getGifs({ keyword = 'panda', limit = 5, page = 0 } = {}) {
     const apiUrl = `${process.env.REACT_APP_API_URL}/gifs/search?api_key=${process.env.REACT_APP_API_KEY}&q=${keyword}&limit=${limit}&offset=${page * limit}&rating=G&lang=en`
     const res = await fetch(apiUrl)
     const response  = await res.json()

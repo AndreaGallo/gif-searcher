@@ -13,8 +13,8 @@ export default function ListOfGifs({ gifs, loading, title }) {
             <h3>{title}</h3>
             <div className="ListOfGifs">
                 {
-                    gifs.map(({id, title, url}) => (
-                        <Gif key={id} 
+                    gifs.map(({id, title, url}, index) => (
+                        <Gif key={id + index} 
                             id={id}
                             title={title}
                             url={url}/>

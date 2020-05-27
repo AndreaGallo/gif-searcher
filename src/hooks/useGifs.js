@@ -25,6 +25,7 @@ export function useGifs({ keyword } = {keyword: null}) {
     useEffect(() => {
         if(page === INITIAL_PAGE) return;
 
+        const controller = new AbortController()
         setLoadingNextPage(true)
         
         getGifs({ keyword: keywordToUse, page })
@@ -33,6 +34,7 @@ export function useGifs({ keyword } = {keyword: null}) {
             setGifs(prevState => [...prevState, ...nextPageGifs])
             localStorage.setItem('lastKeyword', keywordToUse)
         })
+
     }, [keywordToUse, setGifs, page]) 
 
     return {loading, gifs, setPage}

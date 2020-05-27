@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import ListOfGifs from 'components/ListOfGifs'
 import { useGifs } from 'hooks/useGifs'
+import useNearScreen from 'hooks/useNearScreen'
+import throttle from 'just-throttle'
 
 export default function SearchResults({ params }) {
     const {keyword} = params
     const {loading, gifs, setPage} = useGifs({ keyword })
     const title = decodeURI(keyword)
+    const externalRef = useRef()
+    const { isNearScreen } = useNearScreen({ distance: '300px', externalRef, once: false })
+    
 
-    const handleOnClick = () => {
-        setPage(prevPage => prevPage + 1)
-    }
+    const handleNextPage = useCallback(throttle(
+        () => setPage(prevPage => prevPage + 1) , 500
+    ), [])
+
+    useEffect(() => {
+        if(isNearScreen) handleNextPage()
+    }, [handleNextPage, isNearScreen])
     
     return (
         <>
             <ListOfGifs title={title} gifs={gifs} loading={loading}/>
-            <button onClick={handleOnClick}>Go to next page</button>
+            <div id="visor" ref={externalRef}></div>
         </>
     
     )
