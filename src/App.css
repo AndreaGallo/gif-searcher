@@ -13,18 +13,26 @@
 }
 
 .App-title {
-  color: white;
+  color: var(--theme-body-txt);
+  margin-top: 0.6rem;
 }
 
 .App-content {
-  background-color: #121212;
-  color: white;
+  background-color: var(--theme-body-bg);
+  color: var(--theme-body-txt);
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   min-height: 100vh;
   padding: 16px;
   text-align: left;
+}
+
+.App-wrapper {
+	width: 100%;
+	max-width: 90rem;
+	margin: 0 auto;
+	padding: 0 0.5em;
 }
 
 /*----------*/
@@ -37,7 +45,7 @@
 
 .App-results {
   flex-shrink: 2;
-  min-height: 100vh;
+  width: 100%;
 }
 
 .App-category {
@@ -51,9 +59,9 @@
   }
 
   .App-category{
-    padding: 0 2em;
     position: sticky;
-    top: 0;
+    top: var(--search-size-mx-h);
     width: 40%;
+    max-width: 300px;
   }
 }

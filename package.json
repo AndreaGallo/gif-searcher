@@ -9,6 +9,7 @@
     "intersection-observer": "^0.10.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-head": "^3.3.0",
     "react-scripts": "3.4.1",
     "wouter": "^2.4.0"
   },

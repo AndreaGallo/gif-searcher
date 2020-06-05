@@ -1,19 +1,20 @@
-import React, {useContext, useEffect} from 'react'
+import React from 'react'
 import Gif from 'components/Gif'
-import GifsContext from 'contexts/GifsContext'
-import useLocalStorage from 'hooks/useLocalStorage'
+import useSingleGif from 'hooks/useSingleGif'
+import Spinner from 'components/Spinner'
+import { Redirect } from 'wouter'
+import {Title} from 'react-head'
 
 export default function Detail({ params }) {
-    const { id } = params
-    const { gifs } = useContext(GifsContext)
-    const [gif, setGif] = useLocalStorage(id, {})
-
-    useEffect(() => {
-        if(gifs.length) {
-            let value = gifs.find(gif => gif.id === id)
-            setGif(value)
-        }
-    }, [gifs, id, setGif])
+    const {gif, error, loading} = useSingleGif({id : params.id})
     
-    return <Gif {...gif}/>
+    if(loading) return <Spinner />
+    if(error) return <Redirect to="/404" />
+    if (!gif) return null
+
+    return <>
+        <Title>Giffy | {gif.title}</Title>
+        <h3 className="App-title">{gif.title}</h3>
+        <Gif {...gif}/>
+    </>
 }

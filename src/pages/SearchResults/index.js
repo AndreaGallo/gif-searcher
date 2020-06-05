@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useCallback } from 'react'
+import {Title} from 'react-head'
 import ListOfGifs from 'components/ListOfGifs'
 import { useGifs } from 'hooks/useGifs'
 import useNearScreen from 'hooks/useNearScreen'
@@ -21,10 +22,11 @@ export default function SearchResults({ params }) {
     }, [handleNextPage, isNearScreen])
     
     return (
-        <>
+        <div className="App-wrapper">
+            <Title>Giffy | {title}</Title>
             <ListOfGifs title={title} gifs={gifs} loading={loading}/>
             <div id="visor" ref={externalRef}></div>
-        </>
+        </div>
     
     )
 }

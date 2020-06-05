@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import {Link, Route} from 'wouter'
-import StaticContext from 'contexts/StaticContext'
+import { HeadProvider} from 'react-head';
 import Logo from 'components/Logo'
 import {GifContextProvider} from 'contexts/GifsContext'
 
@@ -13,7 +13,7 @@ const Detail = React.lazy(() => import('pages/Detail'))
 function App() {
   
   return (
-    <StaticContext.Provider value={{name: 'is-provider'}}>
+    <HeadProvider>
       <div className="App">
         <section className="App-content">
           <Link to='/'>
@@ -32,11 +32,14 @@ function App() {
               <Route 
                 component={Detail}  
                 path='/gif/:id' />
+              <Route 
+                component={() => <h1>404 ERROR :(</h1>}  
+                path='/404' />
             </GifContextProvider>
           </Suspense>
         </section>
       </div>
-    </StaticContext.Provider>
+    </HeadProvider>
   );
 }
 

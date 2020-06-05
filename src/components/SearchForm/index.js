@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-
+import "./index.css"
 function SearchForm({ onSubmit }) {
     const [keyword, setKeyword] = useState('')
 
@@ -15,6 +15,7 @@ function SearchForm({ onSubmit }) {
 
     return (
         <form onSubmit={handleSubmit}>
+            <button>Buscar</button>
             <input placeholder="Search a gif here..." type='text' value={keyword} onChange={handleChange}/>
         </form>
     )
