@@ -1,7 +1,6 @@
 import React from "react"
 import { useLocation } from "wouter"
 import useForm from 'components/SearchForm/stateLogic'
-import "./index.css"
 
 const RATINGS = ["g", "pg", "pg-13", "r"]
 
